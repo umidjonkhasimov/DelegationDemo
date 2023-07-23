@@ -3,15 +3,20 @@ package uz.gita.delegationdemo_john
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import androidx.lifecycle.Lifecycle
-import androidx.lifecycle.LifecycleEventObserver
-import androidx.lifecycle.LifecycleOwner
 
 class MainActivity : AppCompatActivity(),
     ActivityLogger by ActivityLoggerImpl() {
+
+    private val myLazy by MyLazy {
+        Log.d("GGG", "MyLazy fired")
+        3
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        Log.d("GGG", "Firing MyLazy: $myLazy")
 
         registerLifecycleOwner(this)
     }
